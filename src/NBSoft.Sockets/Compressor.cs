@@ -1,10 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace NBsoft.Sockets
+﻿namespace NBsoft.Sockets
 {
     static class Compressor
     {
