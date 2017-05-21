@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NBsoft.Sockets</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>nunobaraujo</authors>
+    <owners>nunobaraujo</owners>
+    <licenseUrl>https://github.com/nnemesispt/NBsoft.Sockets/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/nnemesispt/NBsoft.Sockets</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Sockets Server/Client Library</description>
+    <releaseNotes>Initial Release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>client server tcp sockets simple easy fast</tags>
+  </metadata>
+</package>
