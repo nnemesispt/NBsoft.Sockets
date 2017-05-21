@@ -1,4 +1,4 @@
-MIT License
+﻿MIT License
 
 Copyright (c) 2017 Nuno Araújo
 
@@ -21,8 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-LZ4.dll
-This project has a dependency of LZ4.dll 
+LZ4net
+This project has a dependency of LZ4net
 https://github.com/MiloszKrajewski/lz4net
 
 Licensed under the following:
