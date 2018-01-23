@@ -3,15 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>2.0.1</Version>
+    <Title>NBSoft.Sockets</Title>
     <authors>nunobaraujo</authors>
-    <owners>nunobaraujo</owners>
-    <licenseUrl>https://github.com/nnemesispt/NBsoft.Sockets/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/nnemesispt/NBsoft.Sockets</projectUrl>
+    <owners>nunobaraujo</owners>    
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <description>Sockets Server/Client Library</description>
-    <releaseNotes>Initial Release</releaseNotes>
-    <copyright>Copyright Nuno Benjamim Araújo 2018</copyright>
-    <tags>client server tcp sockets simple easy fast</tags>
+    <description>Sockets Server/Client Library</description>    
+    <copyright>Copyright Nuno Benjamim Araújo 2018</copyright>    
+    <PackageLicenseUrl>https://github.com/nnemesispt/NBsoft.Sockets/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nnemesispt/NBsoft.Sockets</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nnemesispt/NBsoft.Sockets</RepositoryUrl>
+    <RepositoryType>C#</RepositoryType>
+    <PackageTags>client server tcp sockets simple easy fast</PackageTags>
+    <PackageReleaseNotes>Changed project to netstandard2.0</PackageReleaseNotes>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
