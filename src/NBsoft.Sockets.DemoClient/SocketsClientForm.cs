@@ -15,12 +15,12 @@ namespace NBsoft.Sockets.DemoClient
     {
         SocketClient client;
         // buffer manager
-        internal static System.ServiceModel.Channels.BufferManager Buff = System.ServiceModel.Channels.BufferManager.CreateBufferManager(4096, 4096 * 3);
+        
         public SocketsClientForm()
         {
             InitializeComponent();
             this.FormClosed += SocketsClientForm_FormClosed;
-            client = new SocketClient(Buff);
+            client = new SocketClient();
             client.Connected += Client_Connected;
             client.Disconnected += Client_Disconnected;
             client.Error += Client_Error;

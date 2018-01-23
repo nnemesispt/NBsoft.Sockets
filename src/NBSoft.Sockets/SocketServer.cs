@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.ServiceModel.Channels;
 using System.Threading;
 
 
@@ -11,8 +10,7 @@ namespace NBsoft.Sockets
     public class SocketServer
     {
 
-        #region Variables
-        protected BufferManager _Manager;
+        #region Variables        
         protected List<SocketClientBase> _Clients;
         protected Int64 _ClientCounter;
         private Socket _Listener;
@@ -26,8 +24,7 @@ namespace NBsoft.Sockets
         #region Constructor
         public SocketServer(IPEndPoint Endpoint)
         {
-            _Listener = null;
-            _Manager = BufferManager.CreateBufferManager(4096, 4096000);
+            _Listener = null;            
             _Clients = new List<SocketClientBase>();
             _EndPoint = Endpoint;
             _Waiting = false;
@@ -87,7 +84,7 @@ namespace NBsoft.Sockets
         }
         protected virtual SocketClientBase AcceptIncomingConnectionRequest(Socket IncomingRequestSocket)
         {
-            SocketClient sclient = new SocketClient(_Manager);
+            SocketClient sclient = new SocketClient();
             sclient.Tag = Guid.NewGuid();
             sclient.SetSocket(IncomingRequestSocket);
             sclient.DataReceived += new MessageDelegate(sclient_DataReceived);
@@ -109,7 +106,6 @@ namespace NBsoft.Sockets
                 _Listener.Close();
             _Listener = null;
             DisconnectAll();
-            _Manager.Clear();
         }
 
         private void DisconnectAll()

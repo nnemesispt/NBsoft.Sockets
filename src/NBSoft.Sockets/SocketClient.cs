@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.ServiceModel.Channels;
 
 namespace NBsoft.Sockets
 {
@@ -11,8 +10,7 @@ namespace NBsoft.Sockets
         #region Variables
 
         IPEndPoint iPEndPoint;              // Remote host endpoint
-        Socket sock;                        // Socket
-        protected BufferManager bManager;   // Buffer Manager 
+        Socket sock;                        // Socket        
         List<byte> _ReceivedMessage;        // Incoming message
         bool isConnected;                   // is Connected Flag        
         bool isDisposing;
@@ -39,11 +37,10 @@ namespace NBsoft.Sockets
         /// Base constructor, buffer manager to boost performance.
         /// </summary>
         /// <param name="Manager">Existing System.ServiceModel.Channels.BufferManager</param>
-        public SocketClient(BufferManager Manager)
+        public SocketClient()
         {
             sock = null;
-            isConnected = false;
-            bManager = Manager;
+            isConnected = false;            
             isDisposing = false;
 
             bytesSent = 0;
@@ -73,8 +70,7 @@ namespace NBsoft.Sockets
             catch { }
             iPEndPoint = null;
             sock = null;
-            bManager = null;
-
+            
             _ReceivedMessage = null;
             
         }
@@ -155,12 +151,13 @@ namespace NBsoft.Sockets
         /// </summary>
         /// <param name="Msg">Data to send</param>
         public override void Send(byte[] msg)
-        {            
+        {
             try
             {
-                sendSize = msg.Length;                
+                sendSize = msg.Length;
                 StateObject so = new StateObject(sock);            // Create message object
-                so.Buffer = bManager.TakeBuffer(msg.Length + 10);   // Retrieve buffer from manager
+                //so.Buffer = bManager.TakeBuffer(msg.Length + 10);   // Retrieve buffer from manager
+                so.Buffer = new byte[msg.Length];                   // Retrieve buffer from manager
                 Array.Copy(msg, so.Buffer, msg.Length);             // Copy message to buffer            
                 so.Sock.BeginSend(so.Buffer, 0, msg.Length,         // Send message async
                     SocketFlags.None, EndSend, so);
@@ -276,7 +273,8 @@ namespace NBsoft.Sockets
                 
                 bytesSent = bytesSent + (uint)sendSize;                
                 OnDataSent(new SockMessageEventArgs(so.Buffer));        // Raise DataSent event
-                bManager.ReturnBuffer(so.Buffer);                   // Return buffer to manager
+                //bManager.ReturnBuffer(so.Buffer);                   // Return buffer to manager
+                so.Buffer = null;
             }
             catch (Exception ex01)
             {
@@ -347,7 +345,8 @@ namespace NBsoft.Sockets
         {         
             _ReceivedMessage = new List<byte>();        // Reset received message
             StateObject so = new StateObject(sock);    // Create message object            
-            so.Buffer = bManager.TakeBuffer(1024 * 8);      // Retrieve buffer from manager
+            //so.Buffer = bManager.TakeBuffer(1024 * 8);      // Retrieve buffer from manager
+            so.Buffer = new byte[1024 * 8];      // Retrieve buffer from manager
             try
             {
                 // Receive data asynchronously
@@ -427,7 +426,8 @@ namespace NBsoft.Sockets
 
             byte[] msg = new byte[readedbytes];             // Byte array with correct size
             Array.Copy(so.Buffer, msg, readedbytes);        // Copy readed bytes from buffer to byte array
-            bManager.ReturnBuffer(so.Buffer);               // Return buffer to manager
+            //bManager.ReturnBuffer(so.Buffer);               // Return buffer to manager
+            so.Buffer = null;
             _ReceivedMessage.AddRange(msg);                 // Append received bytes to ncoming message
             msg = null;                                     // Force byte array clear
 

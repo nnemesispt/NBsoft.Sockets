@@ -9,7 +9,7 @@
             string destiFullName = string.Format("{0}{1}.l4z", System.IO.Path.GetTempPath(), OriginFile.Name);
             using (var istream = OriginFile.OpenRead())
             using (var ostream = new System.IO.FileStream(destiFullName, System.IO.FileMode.Create))
-            using (var lzStream = new LZ4.LZ4Stream(ostream, System.IO.Compression.CompressionMode.Compress))
+            using (var lzStream = new LZ4.LZ4Stream(ostream, LZ4.LZ4StreamMode.Compress))
             {
                 istream.CopyTo(lzStream);
             }
@@ -20,7 +20,7 @@
             string destinFile = CompressedFile.FullName.Replace(CompressedFile.Extension, "");
             using (var istream = new System.IO.FileStream(CompressedFile.FullName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
             using (var ostream = new System.IO.FileStream(destinFile, System.IO.FileMode.Create))
-            using (var lzStream = new LZ4.LZ4Stream(istream, System.IO.Compression.CompressionMode.Decompress))
+            using (var lzStream = new LZ4.LZ4Stream(istream, LZ4.LZ4StreamMode.Decompress))
             {
                 lzStream.CopyTo(ostream);
             }
